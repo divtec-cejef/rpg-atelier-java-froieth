@@ -1,13 +1,22 @@
 package Personnages.Heros;
 
 import Personnages.Hero;
+import Personnages.Personnage;
 
 public class Guerrier extends Hero {
 
-    public Guerrier(int PV, float ATK, int DEF) {
-        super(PV, (float) (ATK*1.5), DEF);
+    public Guerrier(String nom) {
+        super(nom,95, 14,8);
     }
 
+    @Override
+    public String competenceSpecialeNom() {
+        return "Coup Puissant";
+    }
 
+    @Override
+    public int competenceSpeciale(Personnage cible) {
+        return Math.round(getATK() * 1.5) - (cible.getDEF()/2) > 1 ? (int)(Math.round(getATK() * 1.5) - (cible.getDEF()/2)) : 1;
+    }
 
 }

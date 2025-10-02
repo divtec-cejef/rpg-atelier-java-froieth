@@ -2,12 +2,20 @@ package Personnages;
 
 public abstract class Monstre extends Personnage {
     int butinXP;
-    int or;
+    int butinOr;
 
-    public Monstre(int PV, float ATK, int DEF, int butinXP, int or) {
-        super(PV, ATK, DEF);
+    public Monstre(String nom, int PV, float ATK, int DEF, int butinXP, int butinOr) {
+        super(nom, PV, ATK, DEF);
         this.butinXP = butinXP;
-        this.or = or;
+        this.butinOr = butinOr;
     }
 
+
+    public int getButinXP() {
+        return butinXP;
+    }
+
+    public int getButinOr() {
+        return butinOr;
+    }
 }

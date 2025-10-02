@@ -88,5 +88,4 @@ public abstract class Hero extends Personnage {
         inventaire.remove(nouvelle);
     }
 
-
 }
