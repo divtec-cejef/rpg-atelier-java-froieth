@@ -6,17 +6,86 @@ import Objet.Objet;
 import java.util.ArrayList;
 
 public abstract class Hero extends Personnage {
-    // TODO : refaire les listes + completer le level par rapport à l'XP
-    int level;
-    int XP;
-    int or;
-    ArrayList<Objet> inventaire = new ArrayList<>();
-    Arme slotArme;
+    private int XP = 0;
+    private int or = 50;
+    private ArrayList<Objet> inventaire = new ArrayList<>();
+    private Arme armeEquipe = null;
 
 
+    public Hero(String nom ,int PVMax, float ATK, int DEF) {
+        super(nom,PVMax,ATK,DEF);
+    }
 
-    public Hero(int PV, float ATK, int DEF) {
-        super(PV, ATK, DEF);
+    /****************** Inventaire ******************/
+    public void ajouterObjet(Objet o) {
+        inventaire.add(o);
+    }
+
+    public void utiliserObjetIndex(int index, Hero cible) {
+        inventaire.get(index).utiliser();
+        inventaire.remove(index);
+    }
+
+    public ArrayList<Objet> getInventaire() {
+        return inventaire;
+    }
+
+
+    /****************** XP ******************/
+    public void gagnerXP(int xp) {
+        XP += xp;
+
+        while (XP >= 100) {
+            setLevel(getLevel() + 1);
+            setPVMax(getPVMax() + 10);
+            setATK(getATK() + 2);
+            setDEF(getDEF() + 1);
+            XP -= 100;
+        }
+    }
+
+    /****************** Or ******************/
+    public int getOr() {
+        return or;
+    }
+
+    public void ajouterOr(int montant) {
+        or += montant;
+    }
+
+    public boolean depenserOr(int montant) {
+        if (or > montant) {
+            or -= montant;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /****************** Boosts permanents ******************/
+    public void boosterPvMax(int bonus) {
+        setPVMax(getPVMax() + bonus);
+    }
+
+    public void boosterAttaque(int bonus) {
+        setATK(getATK() + bonus);
+    }
+
+    public void boosterDefense(int bonus) {
+        setDEF(getDEF() + bonus);
+    }
+
+
+    /****************** Arme ******************/
+    public Arme getArmeEquipee() {
+        return armeEquipe;
+    }
+
+    public void equiperArme(Arme nouvelle) {
+        inventaire.add(armeEquipe);
+        armeEquipe = nouvelle;
+        inventaire.remove(nouvelle);
     }
 
 

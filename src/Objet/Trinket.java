@@ -1,4 +1,4 @@
 package Objet;
 
-public class Trinket {
+public class Trinket extends Objet {
 }
