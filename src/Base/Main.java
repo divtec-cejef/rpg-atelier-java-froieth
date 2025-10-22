@@ -2,6 +2,7 @@ package Base;
 
 import Objet.Potion;
 import Objet.Trinket;
+import Objet.taillePotion;
 import Personnages.Hero;
 import Personnages.Heros.Guerrier;
 import Personnages.Monstre;
@@ -29,14 +30,9 @@ public class Main {
     public static void combat(Hero hero) {
 
         // TODO : supprimer ces lignes après les tests
-        hero.ajouterObjet(new Potion());
+        hero.ajouterObjet(new Potion(taillePotion.GRANDE));
         hero.ajouterObjet(new Trinket());
         hero.ajouterObjet(new Potion());
-
-
-
-
-
 
 
         ConsoleIO console =  new ConsoleIO();
