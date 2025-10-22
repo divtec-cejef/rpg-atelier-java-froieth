@@ -1,10 +1,13 @@
 package Personnages;
 
+import Base.ConsoleIO;
+
 public abstract class Personnage {
+    private ConsoleIO console = new ConsoleIO();
     private String nom;
     private int level = 1;
     private int PVMax;
-    private int PV = PVMax;
+    private int PV;
     private float ATK;
     private int DEF;
 
@@ -12,6 +15,7 @@ public abstract class Personnage {
     public Personnage(String nom ,int PVMax, float ATK, int DEF) {
         this.nom = nom;
         this.PVMax = PVMax >= 1 ?  PVMax : 1;
+        this.PV = PVMax;
         this.ATK = ATK >= 0 ?  ATK : 0;
         this.DEF = DEF >= 0 ?  DEF : 0;
     }
@@ -50,7 +54,26 @@ public abstract class Personnage {
         }
     }
 
-    protected void subirDegats(int dégat) {
+    public void subirDegats(int dégat, Personnage cible) {
+
+        boolean estHero = false;
+        console.afficher("\n");
+        if(this instanceof Monstre) {
+            console.afficherSansRetourLigne("Vous infligez ");
+            estHero = true;
+        } else {
+            console.afficherSansRetourLigne("\t\t\tLe " + cible.getNom() + " vous inflige ");
+        }
+        console.afficherSansRetourLigne(dégat + " dégats");
+        if(estHero) {
+            console.afficherSansRetourLigne(" au " + this.getNom());
+        }
+
+
+
+
+
+
         this.PV -= dégat;
     }
 
@@ -60,12 +83,14 @@ public abstract class Personnage {
         return PV > 0 ? true : false;
     }
 
-    public int attaquer(Monstre cible) {
+    public int attaquer(Personnage cible) {
+
         float min = 0.8f;
         float max = 1.2f;
         float multiplicationDégat = (float) (min + Math.random() * (max - min));
 
         int dégat = this.ATK * multiplicationDégat - cible.getDEF() > 1 ? (int)(this.ATK * multiplicationDégat - cible.getDEF()) : 1;
+
         return dégat;
     }
 

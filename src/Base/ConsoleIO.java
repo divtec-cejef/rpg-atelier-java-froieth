@@ -1,3 +1,8 @@
+package Base;
+
+import Personnages.Hero;
+import Personnages.Monstre;
+
 import java.util.Scanner;
 
 public class ConsoleIO {
@@ -42,6 +47,14 @@ public class ConsoleIO {
     }
 
     /**
+     * Permet de consomer un retour de ligne
+     * @return
+     */
+    public String consomerRetourLigne() {
+        return scanner.nextLine();
+    }
+
+    /**
      * Affiche l'objet
      *
      * @param obj Objet à afficher
@@ -60,6 +73,17 @@ public class ConsoleIO {
     }
 
     /**
+     * Affiche une description textuelle des personnage en combat aisi que leur PV
+     *                          nomHero (40/95PV) / Gobelin (20/50PV)
+     * @param hero Personnage joué par l'utilisateur
+     * @param monstre Monstre
+     */
+    public void afficherPersonnageCombat(Hero hero, Monstre monstre) {
+        afficher("\n\t\t\t  " + hero.getNom() + "(" + hero.getPV() + "/" + hero.getPVMax() + "PV) / " +
+                monstre.getNom() + "(" + monstre.getPV() + "/" + monstre.getPVMax() + "PV)");
+    }
+
+    /**
      * Affiche toutes les actions possible à faire
      */
     public void afficherMenuPricipale() {
@@ -71,4 +95,15 @@ public class ConsoleIO {
                      "\t[5] Taverne (se reposer)\n" +
                      "\t[0] Quitter\n");
     }
+
+    /**
+     * Affiche toutes les actions possible à faire durant un combat
+     */
+    public void afficherMenuCombat(Hero hero) {
+        afficher("======================== Combat ========================\n" +
+                "\t[1] Attaquer\n" +
+                "\t[2] " + hero.competenceSpecialeNom() + "\n" +
+                "\t[3] Fuir\n");
+    }
+
 }

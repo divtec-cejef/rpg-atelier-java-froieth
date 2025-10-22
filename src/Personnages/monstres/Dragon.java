@@ -5,7 +5,7 @@ import Personnages.Personnage;
 
 public class Dragon extends Monstre {
 
-    public Dragon(int PV, float ATK, int DEF, int butinXP, int or) {
+    public Dragon() {
         super("Dragon", 140, 18, 10, 150, 100);
     }
 
