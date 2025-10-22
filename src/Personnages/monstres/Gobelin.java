@@ -5,7 +5,7 @@ import Personnages.Personnage;
 
 public class Gobelin extends Monstre {
 
-    public Gobelin(int PV, float ATK, int DEF, int butinXP, int or) {
+    public Gobelin() {
         super("Gobelin", 50, 9, 3, 40, 20);
     }
 
