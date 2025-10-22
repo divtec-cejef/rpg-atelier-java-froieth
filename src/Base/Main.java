@@ -1,38 +1,64 @@
 package Base;
 
+import Objet.Potion;
+import Objet.Trinket;
 import Personnages.Hero;
 import Personnages.Heros.Guerrier;
 import Personnages.Monstre;
 import Personnages.monstres.Dragon;
 import Personnages.monstres.Gobelin;
 
+import java.util.ArrayList;
 
 
 public class Main {
 
     public static boolean calculerPourcentage(int pourcentage) {
-        return (int)(Math.random() * 100 + 1) > pourcentage ? false : true;
+        return (int) (Math.random() * 100 + 1) <= pourcentage;
     }
 
     public static Monstre monstreAleatoire() {
         return new Gobelin();
     }
 
+    public static void gererInventaire(Hero hero) {
+        ConsoleIO console =  new ConsoleIO();
+        console.afficherMenuInventaire(hero);
+    }
+
     public static void combat(Hero hero) {
+
+        // TODO : supprimer ces lignes après les tests
+        hero.ajouterObjet(new Potion());
+        hero.ajouterObjet(new Trinket());
+        hero.ajouterObjet(new Potion());
+
+
+
+
+
+
+
         ConsoleIO console =  new ConsoleIO();
         Monstre monstre = monstreAleatoire();
 
         boolean continuerCombat = true;
         do {
-            console.afficherPersonnageCombat(hero, monstre);
-            console.afficherMenuCombat(hero);
-            switch (console.readNextInt("Actoin à réaliser : ", 1, 3)) {
-                case 1: monstre.subirDegats(hero.attaquer(monstre), hero);break;
-                case 2: monstre.subirDegats(hero.competenceSpeciale(monstre), hero);break;
-                case 3: continuerCombat = calculerPourcentage(40);
+            boolean repeterSaisi = false;
+            do {
+                repeterSaisi = false;
+                console.afficherPersonnageCombat(hero, monstre);
+                console.afficherMenuCombat(hero);
+                switch (console.readNextInt("Actoin à réaliser : ", 1, 4)) {
+                    case 1: monstre.subirDegats(hero.attaquer(monstre), hero);break;
+                    case 2: monstre.subirDegats(hero.competenceSpeciale(monstre), hero);break;
+                    case 3: gererInventaire(hero);repeterSaisi = true;break;
+                    case 4: continuerCombat = calculerPourcentage(40);
                         if(continuerCombat){console.afficher("\nVous n'avez pas réussi à vous enfuire");
-                        } else {console.afficher("\nVous vous êtes enfui...");} ;break;
-            }
+                        } else {console.afficher("\nVous vous êtes enfui...");}
+                    break;
+                }
+            }while (repeterSaisi);
 
             if(continuerCombat) {
                 console.readNextLine();
@@ -55,7 +81,7 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         ConsoleIO console = new ConsoleIO();
 
         console.afficherMenuPricipale();

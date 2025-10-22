@@ -1,8 +1,10 @@
 package Base;
 
+import Objet.Objet;
 import Personnages.Hero;
 import Personnages.Monstre;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleIO {
@@ -103,7 +105,30 @@ public class ConsoleIO {
         afficher("======================== Combat ========================\n" +
                 "\t[1] Attaquer\n" +
                 "\t[2] " + hero.competenceSpecialeNom() + "\n" +
-                "\t[3] Fuir\n");
+                "\t[3] Utiliser objet\n" +
+                "\t[4] Fuir\n");
+    }
+
+    /**
+     * Affiche tous les objets de l'inventaire
+     */
+    public void afficherMenuInventaire(Hero hero) {
+        afficherSansRetourLigne("\n======================== Inventaire ========================\n");
+
+        if (hero.getInventaire().size() == 0) {
+            afficher("\tAucun objet");
+            consomerRetourLigne();
+        } else {
+            for (int i = 0; i < hero.getInventaire().size(); i++) {
+                afficher("\t[" + (i + 1) + "] " + hero.getInventaire().get(i).toString());
+            }
+            afficher("\t[0] Annuler");
+
+            int objetAUtiliser = readNextInt("\nObjet à utiliser : ", 0, hero.getInventaire().size());
+            if(objetAUtiliser != 0) {
+                hero.utiliserObjetIndex(objetAUtiliser-1);
+            }
+        }
     }
 
 }

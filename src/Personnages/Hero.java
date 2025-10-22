@@ -13,18 +13,20 @@ public abstract class Hero extends Personnage {
     private ArrayList<Objet> inventaire = new ArrayList<>();
     private Arme armeEquipe = null;
 
-
     public Hero(String nom ,int PVMax, float ATK, int DEF) {
         super(nom,PVMax,ATK,DEF);
     }
+
+
 
     /****************** Inventaire ******************/
     public void ajouterObjet(Objet o) {
         inventaire.add(o);
     }
 
-    public void utiliserObjetIndex(int index, Hero cible) {
-        inventaire.get(index).utiliser();
+    public void utiliserObjetIndex(int index) {
+        inventaire.get(index).utiliser(this);
+        console.afficher(inventaire.get(index).getEffet());
         inventaire.remove(index);
     }
 
