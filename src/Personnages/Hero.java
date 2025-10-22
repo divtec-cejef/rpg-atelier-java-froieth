@@ -1,11 +1,13 @@
 package Personnages;
 
+import Base.ConsoleIO;
 import Objet.Arme;
 import Objet.Objet;
 
 import java.util.ArrayList;
 
 public abstract class Hero extends Personnage {
+    private ConsoleIO console = new ConsoleIO();
     private int XP = 0;
     private int or = 50;
     private ArrayList<Objet> inventaire = new ArrayList<>();
@@ -35,6 +37,8 @@ public abstract class Hero extends Personnage {
     public void gagnerXP(int xp) {
         XP += xp;
 
+        console.consomerRetourLigne();
+        console.afficherSansRetourLigne("Niveau " + getLevel() + " -> ");
         while (XP >= 100) {
             setLevel(getLevel() + 1);
             setPVMax(getPVMax() + 10);
@@ -42,6 +46,7 @@ public abstract class Hero extends Personnage {
             setDEF(getDEF() + 1);
             XP -= 100;
         }
+        console.afficher(getLevel() + "\nPVMax = " + getPVMax() + ", ATK = " + getATK() + ", DEF = " + getDEF() + ")");
     }
 
     /****************** Or ******************/
@@ -49,7 +54,7 @@ public abstract class Hero extends Personnage {
         return or;
     }
 
-    public void ajouterOr(int montant) {
+    public void gagnerOr(int montant) {
         or += montant;
     }
 

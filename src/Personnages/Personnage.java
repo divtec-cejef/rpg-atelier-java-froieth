@@ -62,7 +62,7 @@ public abstract class Personnage {
             console.afficherSansRetourLigne("Vous infligez ");
             estHero = true;
         } else {
-            console.afficherSansRetourLigne("\t\t\tLe " + cible.getNom() + " vous inflige ");
+            console.afficherSansRetourLigne("\t\t\t\t\t\tLe " + cible.getNom() + " vous inflige ");
         }
         console.afficherSansRetourLigne(dégat + " dégats");
         if(estHero) {

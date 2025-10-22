@@ -39,7 +39,9 @@ public class Main {
                 if (!monstre.estVivant()) {
                     continuerCombat = false;
                     console.afficher("\nBravo, vous avez vaicu le " + monstre.getNom());
-                    console.afficher("+" + monstre.getButinXP() + "XP\t+" + monstre.getButinOr() + "Or");
+                    console.afficher("+" + monstre.getButinXP() + "XP\t+" + monstre.getButinOr() + " Or");
+                    hero.gagnerXP(monstre.getButinXP());
+                    hero.gagnerOr(monstre.getButinOr());
                 } else {
                     hero.subirDegats(monstre.attaquer(hero), monstre);
                     console.consomerRetourLigne();

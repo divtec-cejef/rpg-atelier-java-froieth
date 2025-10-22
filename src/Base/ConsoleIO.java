@@ -42,7 +42,7 @@ public class ConsoleIO {
      * @return la valeur de la porchaine ligne
      */
     public String readNextLine() {
-        scanner.nextLine(); // Prend le retour à la ligne précédent
+        consomerRetourLigne(); // Prend le retour à la ligne précédent
         return scanner.nextLine();
     }
 
