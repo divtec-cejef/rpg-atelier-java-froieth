@@ -3,13 +3,24 @@ package Objet;
 import Personnages.Hero;
 
 public class Arme extends Objet {
+    private typeArme arme = typeArme.EPEE;
+
 
     public Arme() {
-        super("fwaf");
+        super(typeArme.EPEE.getEffet(), typeArme.EPEE.getNom());
+    }
+
+    public Arme(typeArme arme) {
+        super(arme.getEffet(), arme.getNom());
+    }
+
+    public typeArme getType() {
+        return arme;
     }
 
     @Override
     public void utiliser(Hero cible) {
-
+        cible.setATK(cible.getATK() + arme.bonusATK);
+        cible.setDEF(cible.getDEF() - arme.malusDEF);
     }
 }

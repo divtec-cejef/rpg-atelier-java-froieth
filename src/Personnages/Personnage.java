@@ -34,15 +34,15 @@ public abstract class Personnage {
         this.level = level;
     }
 
-    protected void setPVMax(int PVMax) {
+    public void setPVMax(int PVMax) {
         this.PVMax = PVMax;
     }
 
-    protected void setATK(float ATK) {
+    public void setATK(float ATK) {
         this.ATK = ATK;
     }
 
-    protected void setDEF(int DEF) {
+    public void setDEF(int DEF) {
         this.DEF = DEF;
     }
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Hero extends Personnage {
     private ConsoleIO console = new ConsoleIO();
     private int XP = 0;
-    private int or = 50;
+    private int or = 0;
     private ArrayList<Objet> inventaire = new ArrayList<>();
     private Arme armeEquipe = null;
 

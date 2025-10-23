@@ -4,14 +4,22 @@ import Personnages.Hero;
 
 
 public class Potion extends Objet {
-    taillePotion taille;
+    private taillePotion taille = taillePotion.PETITE;
+    private String nom;
 
     public Potion() {
-        super("+" +taillePotion.PETITE.getPVrestaurer() + "PV");
+        super("+" + taillePotion.PETITE.getPVrestaurer() + "PV", taillePotion.PETITE.getNom());
+        this.nom = taille.getNom();
     }
 
     public Potion(taillePotion taille) {
-        super("+" + taille.getPVrestaurer() + "PV");
+        super("+" + taille.getPVrestaurer() + "PV", taille.getNom());
+        this.taille = taille;
+        this.nom = taille.getNom();
+    }
+
+    public taillePotion getTaille() {
+        return taille;
     }
 
     @Override

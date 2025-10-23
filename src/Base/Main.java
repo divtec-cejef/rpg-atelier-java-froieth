@@ -1,8 +1,10 @@
 package Base;
 
+import Endroit.Boutique;
 import Objet.Potion;
 import Objet.Trinket;
 import Objet.taillePotion;
+import Objet.typeTrinket;
 import Personnages.Hero;
 import Personnages.Heros.Guerrier;
 import Personnages.Monstre;
@@ -31,7 +33,7 @@ public class Main {
 
         // TODO : supprimer ces lignes après les tests
         hero.ajouterObjet(new Potion(taillePotion.GRANDE));
-        hero.ajouterObjet(new Trinket());
+        hero.ajouterObjet(new Trinket(typeTrinket.ATK));
         hero.ajouterObjet(new Potion());
 
 
@@ -80,18 +82,29 @@ public class Main {
     static void main(String[] args) {
         ConsoleIO console = new ConsoleIO();
 
-        console.afficherMenuPricipale();
+
         Hero hero = new Guerrier("test");
+        Boutique boutique = new  Boutique();
+
+        // TODO : supprimer ces lignes après les tests
+        hero.gagnerOr(200);
 
 
+        boolean continuerJeux = true;
+        do {
+            console.afficherMenuPricipale();
+            int choix = console.readNextInt("\nAction à réaliser : ", 0, 5);
+            if (choix == 0) {continuerJeux = false;
+            } else {
+                switch (choix) {
+                    case 1: break;
+                    case 2: combat(hero);break;
+                    case 3: break;
+                    case 4: boutique.visiter(hero);break;
+                    case 5: break;
+                }
+            }
 
-        switch(console.readNextInt("\nAction à réaliser : ", 0, 5)) {
-            case 0: break;
-            case 1: break;
-            case 2: combat(hero); break;
-            case 3: break;
-            case 4: break;
-            case 5: break;
-        }
+        } while (continuerJeux);
     }
 }

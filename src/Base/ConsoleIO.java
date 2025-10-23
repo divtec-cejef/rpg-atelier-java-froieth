@@ -1,5 +1,6 @@
 package Base;
 
+import Endroit.Boutique;
 import Objet.Objet;
 import Personnages.Hero;
 import Personnages.Monstre;
@@ -130,5 +131,17 @@ public class ConsoleIO {
             }
         }
     }
+
+    /**
+     * Affiche tous les objets achetables dans la boutique
+     */
+    public void afficherMenuBoutique(Boutique boutique) {
+        afficher("======================== Boutique ========================\n");
+        for (int i = 0; i < boutique.getObjetsBoutique().size(); i++) {
+            afficher("\t[" + (i + 1) + "] " + boutique.offre(boutique.getObjetsBoutique().get(i), boutique.getPrix().get(i)));
+        }
+        afficher("\t[0] Annuler\n");
+    }
+
 
 }
