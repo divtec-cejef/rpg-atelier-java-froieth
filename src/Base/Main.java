@@ -31,12 +31,6 @@ public class Main {
 
     public static void combat(Hero hero) {
 
-        // TODO : supprimer ces lignes après les tests
-        hero.ajouterObjet(new Potion(taillePotion.GRANDE));
-        hero.ajouterObjet(new Trinket(typeTrinket.ATK));
-        hero.ajouterObjet(new Potion());
-
-
         ConsoleIO console =  new ConsoleIO();
         Monstre monstre = monstreAleatoire();
 
@@ -99,7 +93,7 @@ public class Main {
                 switch (choix) {
                     case 1: break;
                     case 2: combat(hero);break;
-                    case 3: break;
+                    case 3: console.afficherMenuInventaire(hero);break;
                     case 4: boutique.visiter(hero);break;
                     case 5: break;
                 }

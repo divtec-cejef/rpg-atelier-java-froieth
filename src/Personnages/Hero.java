@@ -26,7 +26,17 @@ public abstract class Hero extends Personnage {
 
     public void utiliserObjetIndex(int index) {
         inventaire.get(index).utiliser(this);
-        console.afficher(inventaire.get(index).getEffet());
+        console.afficher("Vous avez utilisé l'objet" + inventaire.get(index) + "-> " + inventaire.get(index).getEffet());
+        inventaire.remove(index);
+    }
+
+    public void equiperArme(int index) {
+        if (armeEquipe != null) {
+            inventaire.add(armeEquipe);
+            console.afficher("Vous avez déséquipé l'arme " + armeEquipe + " -> suppression des bonus " + armeEquipe.getEffet());
+        }
+        armeEquipe = (Arme) inventaire.get(index);
+        inventaire.get(index).utiliser(this);
         inventaire.remove(index);
     }
 

@@ -1,7 +1,7 @@
 package Base;
 
 import Endroit.Boutique;
-import Objet.Objet;
+import Objet.*;
 import Personnages.Hero;
 import Personnages.Monstre;
 
@@ -127,7 +127,11 @@ public class ConsoleIO {
 
             int objetAUtiliser = readNextInt("\nObjet à utiliser : ", 0, hero.getInventaire().size());
             if(objetAUtiliser != 0) {
-                hero.utiliserObjetIndex(objetAUtiliser-1);
+                if(hero.getInventaire().get(objetAUtiliser - 1) instanceof Arme) {
+                    hero.equiperArme(objetAUtiliser - 1);
+                } else {
+                    hero.utiliserObjetIndex(objetAUtiliser-1);
+                }
             }
         }
     }
