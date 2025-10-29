@@ -91,14 +91,31 @@ public class ConsoleIO {
      * Affiche toutes les actions possible à faire
      */
     public void afficherMenuPricipale() {
-        afficher("\n======================== RPG Simplifié ========================\n" +
+        afficher("\n======================== Menu Pricipale ========================\n" +
                      "\t[1] Voir le héros\n" +
-                     "\t[2] Préparer un combat (gérer inventaire puis combatre)\n" +
+                     "\t[2] Préparer un combat\n" +
                      "\t[3] Voir l'inventaire / utiliser ou équiper\n" +
                      "\t[4] Boutique (acheter objets)\n" +
                      "\t[5] Taverne (se reposer)\n" +
                      "\t[0] Quitter\n");
     }
+
+    /**
+     * Affiche toutes les actions possible à faire avant un combat
+     */
+    public void afficherMenuPréparerCombat(Hero hero, Monstre monstre, boolean récompense) {
+        afficher("======================== Préparer Combat ========================\n" +
+                "\t[1] Gérer inventaire\n" +
+                "\t[2] Commencer combat\n" +
+                "\t[0] Retour\n");
+
+        switch(readNextInt("Action à réaliser : ", 0, 2)) {
+            case 1: afficherMenuInventaire(hero); afficherMenuPréparerCombat(hero, monstre, récompense);break;
+            case 2: Combat combat = new Combat(); combat.combattre(hero, monstre, récompense);
+            case 0: break;
+        }
+    }
+
 
     /**
      * Affiche toutes les actions possible à faire durant un combat

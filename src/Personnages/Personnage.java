@@ -2,6 +2,8 @@ package Personnages;
 
 import Base.ConsoleIO;
 
+import static Objet.typeTrinket.PVMAX;
+
 public abstract class Personnage {
     private ConsoleIO console = new ConsoleIO();
     private String nom;
@@ -35,6 +37,9 @@ public abstract class Personnage {
     }
 
     public void setPVMax(int PVMax) {
+        if(this.PV == this.PVMax) {
+            this.PV = PVMax;
+        }
         this.PVMax = PVMax;
     }
 

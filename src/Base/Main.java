@@ -30,7 +30,7 @@ public class Main {
         Taverne taverne = new Taverne();
 
         // TODO : supprimer ces lignes après les tests
-        hero.gagnerOr(20);
+        hero.gagnerOr(2000);
 
 
         boolean continuerJeux = true;
@@ -41,7 +41,7 @@ public class Main {
             } else {
                 switch (choix) {
                     case 1: break;
-                    case 2: Combat combat = new Combat(); combat.combattre(hero, monstreAleatoire(), true);break;
+                    case 2: console.afficherMenuPréparerCombat(hero, monstreAleatoire(), true);break;
                     case 3: console.afficherMenuInventaire(hero);break;
                     case 4: boutique.visiter(hero);break;
                     case 5: taverne.visiter(hero);break;
