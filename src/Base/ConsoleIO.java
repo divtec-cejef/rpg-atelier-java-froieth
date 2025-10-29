@@ -1,6 +1,7 @@
 package Base;
 
 import Endroit.Boutique;
+import Endroit.Taverne;
 import Objet.*;
 import Personnages.Hero;
 import Personnages.Monstre;
@@ -90,7 +91,7 @@ public class ConsoleIO {
      * Affiche toutes les actions possible à faire
      */
     public void afficherMenuPricipale() {
-        afficher("======================== RPG Simplifié ========================\n" +
+        afficher("\n======================== RPG Simplifié ========================\n" +
                      "\t[1] Voir le héros\n" +
                      "\t[2] Préparer un combat (gérer inventaire puis combatre)\n" +
                      "\t[3] Voir l'inventaire / utiliser ou équiper\n" +
@@ -102,23 +103,23 @@ public class ConsoleIO {
     /**
      * Affiche toutes les actions possible à faire durant un combat
      */
-    public void afficherMenuCombat(Hero hero) {
+    public void afficherMenuCombat(Hero hero, Monstre monstre) {
+        afficherPersonnageCombat(hero, monstre);
         afficher("======================== Combat ========================\n" +
                 "\t[1] Attaquer\n" +
                 "\t[2] " + hero.competenceSpecialeNom() + "\n" +
                 "\t[3] Utiliser objet\n" +
-                "\t[4] Fuir\n");
+                "\t[0] Fuir\n");
     }
 
     /**
      * Affiche tous les objets de l'inventaire
      */
     public void afficherMenuInventaire(Hero hero) {
-        afficherSansRetourLigne("\n======================== Inventaire ========================\n");
+        afficher("\n======================== Inventaire ========================");
 
         if (hero.getInventaire().size() == 0) {
             afficher("\tAucun objet");
-            consomerRetourLigne();
         } else {
             for (int i = 0; i < hero.getInventaire().size(); i++) {
                 afficher("\t[" + (i + 1) + "] " + hero.getInventaire().get(i).toString());
@@ -134,18 +135,44 @@ public class ConsoleIO {
                 }
             }
         }
+        readNextLine();
     }
 
     /**
      * Affiche tous les objets achetables dans la boutique
      */
     public void afficherMenuBoutique(Boutique boutique) {
-        afficher("======================== Boutique ========================\n");
+        afficher("\n======================== Boutique ========================");
         for (int i = 0; i < boutique.getObjetsBoutique().size(); i++) {
             afficher("\t[" + (i + 1) + "] " + boutique.offre(boutique.getObjetsBoutique().get(i), boutique.getPrix().get(i)));
         }
         afficher("\t[0] Annuler\n");
     }
 
+    /**
+     * Affiche toutes les actions possible dans la taverne
+     */
+    public void afficherMenuTaverne(int prixRepos) {
+        afficher("\n======================== Taverne ========================\n" +
+                     "\t[1] Se reposer(" + prixRepos + " Or)\n" +
+                     "\t[2] Se battre avec le tavernier\n" +
+                     "\t[0] Partir\n");
+    }
 
+    /**
+     * Affiche le game over
+     */
+    public void gameOver() {
+        afficher("\n\n" +
+                "███▀▀▀██ ███▀▀▀███ ███▀█▄█▀███ ██▀▀▀▀\n" +
+                "██    ██ ██     ██ ██   █   ██ ██    \n" +
+                "██   ▄▄▄ ██▄▄▄▄▄██ ██   ▀   ██ ██▀▀▀▀\n" +
+                "██    ██ ██     ██ ██       ██ ██    \n" +
+                "███▄▄▄██ ██     ██ ██       ██ ██▄▄▄▄\n\n" +
+                "███▀▀▀███ ▀██     ██▀ ██▀▀▀ ██▀▀▀▀██▄\n" +
+                "██     ██   ██   ██   ██    ██     ██\n" +
+                "██     ██   ██   ██   ██▀▀▀ ██▄▄▄▄▄▀▀\n" +
+                "██     ██   ██   ██   ██    ██     ██\n" +
+                "███▄▄▄███     ▀█▀     ██▄▄▄ ██     ██▄\n");
+    }
 }

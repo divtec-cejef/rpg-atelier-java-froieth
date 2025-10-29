@@ -17,8 +17,6 @@ public abstract class Hero extends Personnage {
         super(nom,PVMax,ATK,DEF);
     }
 
-
-
     /****************** Inventaire ******************/
     public void ajouterObjet(Objet o) {
         inventaire.add(o);
@@ -26,17 +24,18 @@ public abstract class Hero extends Personnage {
 
     public void utiliserObjetIndex(int index) {
         inventaire.get(index).utiliser(this);
-        console.afficher("Vous avez utilisé l'objet" + inventaire.get(index) + "-> " + inventaire.get(index).getEffet());
+        console.afficher("Vous avez utilisé l'objet" + inventaire.get(index).getNom() + "-> " + inventaire.get(index).getEffet());
         inventaire.remove(index);
     }
 
     public void equiperArme(int index) {
         if (armeEquipe != null) {
             inventaire.add(armeEquipe);
-            console.afficher("Vous avez déséquipé l'arme " + armeEquipe + " -> suppression des bonus " + armeEquipe.getEffet());
+            console.afficherSansRetourLigne("\nVous avez déséquipé l'arme " + armeEquipe.getNom() + " -> suppression des bonus \"" + armeEquipe.getEffet() + "\"");
         }
         armeEquipe = (Arme) inventaire.get(index);
         inventaire.get(index).utiliser(this);
+        console.afficher("Vous avez équipé l'arme " + inventaire.get(index).getNom() + " -> " + inventaire.get(index).getEffet());
         inventaire.remove(index);
     }
 
