@@ -21,9 +21,9 @@ public abstract class Hero extends Personnage {
     @Override
     public String toString() {
         return "\n=========================== Héro ===========================\n" +
-                "\tOr posséder : " + or + "\n" +
-                "\tNiveau " + getLevel() + " -> " + XP + "/100XP\n" +
-                "\tArme équipée : " + getArmeEquipee();
+                String.format("%-35s %s\n", "\tOr possédé : " + or + " Or", "PV : " + getPV() + "/" + getPVMax()) +
+                String.format("%-35s %s\n", "\tNiveau " + getLevel() + " -> " + XP + "/100XP", "ATK : " + getATK()) +
+                String.format("%-35s %s", "\tArme équipée : " + getArmeEquipee(), "DEF : " + getDEF());
     }
 
     /****************** Inventaire ******************/

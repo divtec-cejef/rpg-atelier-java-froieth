@@ -6,7 +6,7 @@ import Personnages.Personnage;
 public class Gobelin extends Monstre {
 
     public Gobelin() {
-        super("Gobelin", 50, 9, 3, 200, 20);
+        super("Gobelin", 50, 15, 3, 20, 20);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Gobelin extends Monstre {
 
     @Override
     public int competenceSpeciale(Personnage cible) {
-        return 6;
+        return 20;
     }
 
 

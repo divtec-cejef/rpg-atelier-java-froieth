@@ -10,7 +10,7 @@ public class Mage extends Hero {
     private ConsoleIO console = new ConsoleIO();
     private int manaMax = 50;
     private int mana = manaMax;
-    private final int coutCompétence = 15;
+    private final int coutCompétence = 20;
 
     public Mage(String nom) {
         super(nom, 70, 12, 5);

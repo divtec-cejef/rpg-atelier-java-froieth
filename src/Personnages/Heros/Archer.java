@@ -16,12 +16,12 @@ public class Archer extends Hero {
 
     @Override
     public int  competenceSpeciale(Personnage cible) {
-        int dégats = 1;
-        int chance = (int) (Math.random() * 2);
-        if (chance == 0) {
-            dégats *= 2;
+        int dégats;
+        int chance = ((int)(Math.random() * 3) + 1);
+        if (chance <= 2) {
+            dégats = Math.round(getATK() * 2) - (cible.getDEF()/2) > 1 ? (int)(Math.round(getATK() * 2) - (cible.getDEF()/2)) : 1;
         } else {
-            dégats *= 1.25 * (getATK() * cible.getDEF());
+            dégats = 1;
         }
         return dégats;
     }

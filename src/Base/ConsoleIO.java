@@ -89,6 +89,16 @@ public class ConsoleIO {
     }
 
     /**
+     * Affiche le menu pour la création du personnage
+     */
+    public void afficherMenuCréationPersonnage() {
+        afficher("\n======================== Création du Héro ========================\n" +
+                "\t[1] Guerrier\n" +
+                "\t[2] Mage\n" +
+                "\t[3] Archer\n");
+    }
+
+    /**
      * Affiche toutes les actions possible à faire
      */
     public void afficherMenuPricipale() {
