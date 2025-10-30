@@ -4,7 +4,7 @@ public enum taillePotion {
     PETITE(20, "mineure"),
     MOYENNE(50, "standard"),
     GRANDE(120, "puissante"),
-    IMMENSE(1000, "ultime"),;
+    IMMENSE(999999999, "ultime"),;
 
 
     private int PVrestaurer;

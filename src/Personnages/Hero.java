@@ -58,7 +58,7 @@ public abstract class Hero extends Personnage {
         XP += xp;
 
         console.consomerRetourLigne();
-        console.afficherSansRetourLigne("Niveau " + getLevel() + " -> ");
+        int levelAvant = getLevel();
         int PVMaxAvant = getPVMax();
         int ATKAvant = (int) getATK();
         int DEFAvant = getDEF();
@@ -79,13 +79,14 @@ public abstract class Hero extends Personnage {
                 ((Mage)this).setMana(((Mage)this).getManaMax());
             }
         }
-        console.afficherSansRetourLigne(getLevel() + "\n\tPV Max : " + PVMaxAvant + " -> " + getPVMax() +
-                "\n\tATK : " + ATKAvant + " -> " + (int)getATK() + "\n\tDEF : " + DEFAvant + " -> " + getDEF() + "\n");
+        if(levelAvant != getLevel()) {
+            console.afficherSansRetourLigne("Niveau " + levelAvant + " -> " + getLevel() + "\n\tPV Max : " + PVMaxAvant + " -> " + getPVMax() +
+                    "\n\tATK : " + ATKAvant + " -> " + (int)getATK() + "\n\tDEF : " + DEFAvant + " -> " + getDEF() + "\n");
 
-        if(this instanceof Mage) {
-            console.afficherSansRetourLigne( "\tMana Max : " + ManaMaxAvant + " -> " + ((Mage)this).getManaMax() + "\n");
+            if(this instanceof Mage) {
+                console.afficherSansRetourLigne( "\tMana Max : " + ManaMaxAvant + " -> " + ((Mage)this).getManaMax() + "\n");
+            }
         }
-
     }
 
     /****************** Or ******************/

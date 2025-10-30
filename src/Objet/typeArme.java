@@ -2,7 +2,8 @@ package Objet;
 
 public enum typeArme {
     EPEE("Épée", 3, "f"),
-    ARC("Arc", 4, 2, "m");
+    ARC("Arc", 4, 2, "m"),
+    SNIPER("Sniper", 10, 10, "m");
 
     protected String nom;
     protected int bonusATK;

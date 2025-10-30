@@ -36,6 +36,7 @@ public class Main {
 
         Boutique boutique = new  Boutique();
         Taverne taverne = new Taverne();
+        Quete quete = new Quete();
         Hero hero;
 
         console.afficherMenuCréationPersonnage();
@@ -46,7 +47,7 @@ public class Main {
             case 3: console.afficherSansRetourLigne("Nom du Héro : "); hero = new Archer(console.readNextLine()); break;
         }
 
-        hero.gagnerOr(30);
+        hero.gagnerOr(50);
 
         boolean continuerJeux = true;
         do {
@@ -55,11 +56,11 @@ public class Main {
             switch (choix) {
                 case 0: continuerJeux = false; break;
                 case 1: console.afficher(hero); console.readNextLine();break;
-                case 2: console.afficherMenuPréparerCombat(hero, monstreAleatoire(), true);break;
+                case 2: console.afficherMenuPréparerCombat(hero, monstreAleatoire(), true, quete);break;
                 case 3: console.afficherMenuInventaire(hero);break;
                 case 4: boutique.visiter(hero);break;
                 case 5: taverne.visiter(hero);break;
-                case 6: break;
+                case 6: console.afficherMenuQuetes(quete);break;
             }
 
         } while (continuerJeux);
@@ -67,3 +68,4 @@ public class Main {
 }
 
 // TODO : faire pour qu'il y ait un boss de fin
+// TODO : enlever l'affichage du level up à la fin du combat quand ce n'est pas nécéssaire

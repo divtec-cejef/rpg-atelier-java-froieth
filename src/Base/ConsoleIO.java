@@ -105,24 +105,25 @@ public class ConsoleIO {
         afficher("\n======================== Menu Pricipale ========================\n" +
                      "\t[1] Voir le héros\n" +
                      "\t[2] Préparer un combat\n" +
-                     "\t[3] Voir l'inventaire / utiliser ou équiper\n" +
-                     "\t[4] Boutique (acheter objets)\n" +
-                     "\t[5] Taverne (se reposer)\n" +
+                     "\t[3] Inventaire\n" +
+                     "\t[4] Boutique\n" +
+                     "\t[5] Taverne\n" +
+                     "\t[6] Quêtes\n" +
                      "\t[0] Quitter\n");
     }
 
     /**
      * Affiche toutes les actions possible à faire avant un combat
      */
-    public void afficherMenuPréparerCombat(Hero hero, Monstre monstre, boolean récompense) {
+    public void afficherMenuPréparerCombat(Hero hero, Monstre monstre, boolean récompense, Quete quete) {
         afficher("\n======================== Préparer Combat ========================\n" +
                 "\t[1] Gérer inventaire\n" +
                 "\t[2] Commencer combat\n" +
                 "\t[0] Retour\n");
 
         switch(readNextInt("Action à réaliser : ", 0, 2)) {
-            case 1: afficherMenuInventaire(hero); afficherMenuPréparerCombat(hero, monstre, récompense);break;
-            case 2: Combat combat = new Combat(); combat.combattre(hero, monstre, récompense);
+            case 1: afficherMenuInventaire(hero); afficherMenuPréparerCombat(hero, monstre, récompense, quete);break;
+            case 2: Combat combat = new Combat(quete); combat.combattre(hero, monstre, récompense);
             case 0: break;
         }
     }
@@ -184,11 +185,30 @@ public class ConsoleIO {
     /**
      * Affiche toutes les actions possible dans la taverne
      */
-    public void afficherMenuTaverne(int prixRepos) {
-        afficher("\n======================== Taverne ========================\n" +
-                     "\t[1] Se reposer(" + prixRepos + " Or)\n" +
-                     "\t[2] Se battre avec le tavernier\n" +
-                     "\t[0] Partir\n");
+    public void afficherMenuTaverne(int prixRepos, boolean tavernierLà) {
+        if(tavernierLà) {
+            afficher("\n======================== Taverne ========================\n" +
+                         "\t[1] Se reposer(" + prixRepos + " Or)\n" +
+                         "\t[2] Se battre avec le tavernier\n" +
+                         "\t[0] Partir\n");
+        } else {
+            afficher("\n======================== Taverne ========================\n" +
+                    "\t[1] Se reposer\n" +
+                    "\t[0] Partir\n");
+        }
+    }
+
+    /**
+     * Affiche toutes les quêtes non-réaliser
+     */
+    public void afficherMenuQuetes(Quete quete) {
+        afficher("\n============================ Quêtes ============================");
+        for(int i = 0; i < quete.getQuetes().size(); i++) {
+            if(quete.getQueteTerminer().get(i) == false) {
+                afficher("\t[" + (i + 1) + "] " + quete.getQuetes().get(i) + " -> Récompense : " + quete.getRécompense().get(i).getNom());
+            }
+        }
+        readNextLine();
     }
 
     /**
@@ -207,4 +227,6 @@ public class ConsoleIO {
                 "██     ██   ██   ██   ██    ██     ██\n" +
                 "███▄▄▄███     ▀█▀     ██▄▄▄ ██     ██▄\n");
     }
+
+
 }

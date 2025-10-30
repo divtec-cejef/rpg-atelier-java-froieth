@@ -3,8 +3,18 @@ package Base;
 import Personnages.Hero;
 import Personnages.Heros.Mage;
 import Personnages.Monstre;
+import Personnages.monstres.Dragon;
+import Personnages.monstres.Gobelin;
+import Personnages.monstres.Troll;
 
 public class Combat {
+    private Quete quete;
+    private boolean gagnerCombat = false;
+
+
+    public Combat(Quete quete) {
+        this.quete = quete;
+    }
 
     public static boolean calculerPourcentage(int pourcentage) {
         return (int) (Math.random() * 100 + 1) <= pourcentage;
@@ -13,6 +23,10 @@ public class Combat {
     public void gererInventaire(Hero hero) {
         ConsoleIO console =  new ConsoleIO();
         console.afficherMenuInventaire(hero);
+    }
+
+    public boolean getGagnerCombat() {
+        return gagnerCombat;
     }
 
     public void combattre(Hero hero, Monstre monstre, boolean récompense) {
@@ -41,12 +55,20 @@ public class Combat {
             if(continuerCombat) {
                 console.readNextLine();
                 if (!monstre.estVivant()) {
+                    gagnerCombat = true;
                     continuerCombat = false;
                     console.afficher("\nBravo, vous avez vaicu le " + monstre.getNom());
                     if(récompense){
                         console.afficher("+" + monstre.getButinXP() + "XP\t+" + monstre.getButinOr() + " Or");
                         hero.gagnerXP(monstre.getButinXP());
                         hero.gagnerOr(monstre.getButinOr());
+                    }
+                    if(monstre instanceof Gobelin) {
+                        quete.setNbreAVaincre(0);
+                    } else if (monstre instanceof Troll) {
+                        quete.setNbreAVaincre(1);
+                    } else if (monstre instanceof Dragon) {
+                        quete.setNbreAVaincre(2);
                     }
                 } else {
                     if((int)(Math.random() * 100) + 1 <= pourcentageChanceAttaqueSpéMonstre){
