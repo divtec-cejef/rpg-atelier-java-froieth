@@ -6,7 +6,7 @@ import Personnages.Personnage;
 public class Dragon extends Monstre {
 
     public Dragon() {
-        super("Dragon", 140, 18, 10, 150, 100);
+        super("Dragon", 170, 50, 10, 150, 100);
     }
 
     @Override
@@ -14,9 +14,8 @@ public class Dragon extends Monstre {
         return "Souffle de Feu";
     }
 
-    // TODO : faire compétence spécial troll + dragon
     @Override
     public int competenceSpeciale(Personnage cible) {
-        return 28 - Math.round(cible.getDEF() * 0.7) > 1 ? (int)(28 - Math.round(cible.getDEF() * 0.7)) : 1;
+        return 28 - Math.round(cible.getDEF() * 0.7) > 1 ? (int)(100 - Math.round(cible.getDEF() * 0.7)) : 1;
     }
 }

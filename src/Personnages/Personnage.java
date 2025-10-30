@@ -1,6 +1,7 @@
 package Personnages;
 
 import Base.ConsoleIO;
+import Personnages.Heros.Mage;
 
 import static Objet.typeTrinket.PVMAX;
 
@@ -59,25 +60,30 @@ public abstract class Personnage {
         }
     }
 
-    public void subirDegats(int dégat, Personnage cible) {
+    public void subirDegats(int dégat, Personnage cible, boolean attaqueSpé) {
 
         boolean estHero = false;
         console.afficher("\n");
         if(this instanceof Monstre) {
-            console.afficherSansRetourLigne("Vous infligez ");
+            if(attaqueSpé) {
+                if(cible instanceof Mage && dégat == 0) {
+                    console.afficherSansRetourLigne("Vous tentez d'utilisez " + cible.competenceSpecialeNom() + ",\n  mais vous n'avez pas assez de mana." +
+                            "\n    Vous infligez donc ");
+                } else {
+                    console.afficherSansRetourLigne("Vous utilisez " + cible.competenceSpecialeNom() + "\n  et infligez ");
+                }
+            } else {console.afficherSansRetourLigne("Vous infligez ");}
+
             estHero = true;
         } else {
-            console.afficherSansRetourLigne("\t\t\t\t\t\tLe " + cible.getNom() + " vous inflige ");
+            if(attaqueSpé) {
+                console.afficherSansRetourLigne("\t\t\t\t\tLe " + cible.getNom() + " utilise " + cible.competenceSpecialeNom() + "\n\t\t\t\t\t  et vous inflige ");
+            } else {console.afficherSansRetourLigne("\t\t\t\t\t\tLe " + cible.getNom() + " vous inflige ");}
         }
         console.afficherSansRetourLigne(dégat + " dégats");
         if(estHero) {
             console.afficherSansRetourLigne(" au " + this.getNom());
         }
-
-
-
-
-
 
         this.PV -= dégat;
     }

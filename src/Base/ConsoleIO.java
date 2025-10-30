@@ -4,6 +4,7 @@ import Endroit.Boutique;
 import Endroit.Taverne;
 import Objet.*;
 import Personnages.Hero;
+import Personnages.Heros.Mage;
 import Personnages.Monstre;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class ConsoleIO {
      * Affiche toutes les actions possible à faire avant un combat
      */
     public void afficherMenuPréparerCombat(Hero hero, Monstre monstre, boolean récompense) {
-        afficher("======================== Préparer Combat ========================\n" +
+        afficher("\n======================== Préparer Combat ========================\n" +
                 "\t[1] Gérer inventaire\n" +
                 "\t[2] Commencer combat\n" +
                 "\t[0] Retour\n");
@@ -116,16 +117,20 @@ public class ConsoleIO {
         }
     }
 
-
     /**
      * Affiche toutes les actions possible à faire durant un combat
      */
     public void afficherMenuCombat(Hero hero, Monstre monstre) {
         afficherPersonnageCombat(hero, monstre);
-        afficher("======================== Combat ========================\n" +
+        afficherSansRetourLigne("======================== Combat ========================\n" +
                 "\t[1] Attaquer\n" +
-                "\t[2] " + hero.competenceSpecialeNom() + "\n" +
-                "\t[3] Utiliser objet\n" +
+                "\t[2] " + hero.competenceSpecialeNom());
+
+        if(hero instanceof Mage) {
+            afficherSansRetourLigne(" (" + ((Mage)hero).getCoutCompétence() + " mana)");
+        }
+
+        afficher("\n\t[3] Utiliser objet\n" +
                 "\t[0] Fuir\n");
     }
 

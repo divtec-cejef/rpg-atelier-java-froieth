@@ -3,6 +3,7 @@ package Endroit;
 import Base.Combat;
 import Base.ConsoleIO;
 import Personnages.Hero;
+import Personnages.Heros.Mage;
 import Personnages.Tavernier;
 
 public class Taverne {
@@ -36,6 +37,11 @@ public class Taverne {
                         console.afficherSansRetourLigne("PV : " + hero.getPV() + " -> ");
                         hero.soigner(999999999);
                         console.afficher(hero.getPV());
+                        if(hero instanceof Mage) {
+                            console.afficherSansRetourLigne("Mana : " + ((Mage)hero).getManaRestant() + " -> ");
+                            ((Mage)hero).setMana(((Mage)hero).getManaMax());
+                            console.afficher(((Mage)hero).getManaRestant());
+                        }
                     }
                     console.consomerRetourLigne();break;
                 case 0: break;

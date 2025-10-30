@@ -3,6 +3,7 @@ package Personnages;
 import Base.ConsoleIO;
 import Objet.Arme;
 import Objet.Objet;
+import Personnages.Heros.Mage;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,14 @@ public abstract class Hero extends Personnage {
 
     public Hero(String nom ,int PVMax, float ATK, int DEF) {
         super(nom,PVMax,ATK,DEF);
+    }
+
+    @Override
+    public String toString() {
+        return "\n=========================== Héro ===========================\n" +
+                "\tOr posséder : " + or + "\n" +
+                "\tNiveau " + getLevel() + " -> " + XP + "/100XP\n" +
+                "\tArme équipée : " + getArmeEquipee();
     }
 
     /****************** Inventaire ******************/
@@ -50,14 +59,33 @@ public abstract class Hero extends Personnage {
 
         console.consomerRetourLigne();
         console.afficherSansRetourLigne("Niveau " + getLevel() + " -> ");
+        int PVMaxAvant = getPVMax();
+        int ATKAvant = (int) getATK();
+        int DEFAvant = getDEF();
+        int ManaMaxAvant = 0;
+        if(this instanceof Mage) {
+            ManaMaxAvant = ((Mage)this).getManaMax();
+        }
+
         while (XP >= 100) {
             setLevel(getLevel() + 1);
             setPVMax(getPVMax() + 10);
+            soigner(getPVMax());;
             setATK(getATK() + 2);
             setDEF(getDEF() + 1);
             XP -= 100;
+            if(this instanceof Mage) {
+                ((Mage)this).setManaMax(((Mage)this).getManaMax() + 5);
+                ((Mage)this).setMana(((Mage)this).getManaMax());
+            }
         }
-        console.afficher(getLevel() + "\nPVMax = " + getPVMax() + ", ATK = " + getATK() + ", DEF = " + getDEF() + ")");
+        console.afficherSansRetourLigne(getLevel() + "\n\tPV Max : " + PVMaxAvant + " -> " + getPVMax() +
+                "\n\tATK : " + ATKAvant + " -> " + (int)getATK() + "\n\tDEF : " + DEFAvant + " -> " + getDEF() + "\n");
+
+        if(this instanceof Mage) {
+            console.afficherSansRetourLigne( "\tMana Max : " + ManaMaxAvant + " -> " + ((Mage)this).getManaMax() + "\n");
+        }
+
     }
 
     /****************** Or ******************/
@@ -94,14 +122,15 @@ public abstract class Hero extends Personnage {
 
 
     /****************** Arme ******************/
-    public Arme getArmeEquipee() {
-        return armeEquipe;
-    }
+    public String getArmeEquipee() {
+        String message;
+        if(armeEquipe == null) {
+            message = "Aucune";
+        } else {
+            message = armeEquipe.toString();
+        }
 
-    public void equiperArme(Arme nouvelle) {
-        inventaire.add(armeEquipe);
-        armeEquipe = nouvelle;
-        inventaire.remove(nouvelle);
+        return message;
     }
 
 }
