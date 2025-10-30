@@ -41,7 +41,7 @@ public class Combat {
                 repeterSaisi = false;
                 console.afficherMenuCombat(hero, monstre);
                 if(hero instanceof Mage) {console.afficher("Mana restant : " + ((Mage)hero).getManaRestant());}
-                switch (console.readNextInt("Actoin à réaliser : ", 0, 3)) {
+                switch (console.readNextInt("Action à réaliser : ", 0, 3)) {
                     case 1: monstre.subirDegats(hero.attaquer(monstre), hero, false);break;
                     case 2: monstre.subirDegats(hero.competenceSpeciale(monstre), hero, true);break;
                     case 3: gererInventaire(hero);repeterSaisi = true;break;
@@ -63,11 +63,11 @@ public class Combat {
                         hero.gagnerXP(monstre.getButinXP());
                         hero.gagnerOr(monstre.getButinOr());
                     }
-                    if(monstre instanceof Gobelin) {
+                    if(monstre instanceof Gobelin && !quete.getQueteTerminer().get(0)) {
                         quete.setNbreAVaincre(0);
-                    } else if (monstre instanceof Troll) {
+                    } else if (monstre instanceof Troll && !quete.getQueteTerminer().get(1)) {
                         quete.setNbreAVaincre(1);
-                    } else if (monstre instanceof Dragon) {
+                    } else if (monstre instanceof Dragon && !quete.getQueteTerminer().get(0)) {
                         quete.setNbreAVaincre(2);
                     }
                 } else {

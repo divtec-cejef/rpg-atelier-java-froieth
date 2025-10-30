@@ -36,7 +36,6 @@ public class Main {
 
         Boutique boutique = new  Boutique();
         Taverne taverne = new Taverne();
-        Quete quete = new Quete();
         Hero hero;
 
         console.afficherMenuCréationPersonnage();
@@ -49,6 +48,7 @@ public class Main {
 
         hero.gagnerOr(50);
 
+        Quete quete = new Quete(hero);
         boolean continuerJeux = true;
         do {
             console.afficherMenuPricipale();
@@ -67,5 +67,4 @@ public class Main {
     }
 }
 
-// TODO : faire pour qu'il y ait un boss de fin
-// TODO : enlever l'affichage du level up à la fin du combat quand ce n'est pas nécéssaire
+// TODO : faire pour qu'il y ait un boss de fin (idée : tavernier (fort si tu l'as combattu sinon gentil))

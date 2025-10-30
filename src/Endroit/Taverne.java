@@ -4,6 +4,7 @@ import Base.Combat;
 import Base.ConsoleIO;
 import Base.Quete;
 import Personnages.Hero;
+import Personnages.Heros.Guerrier;
 import Personnages.Heros.Mage;
 import Personnages.Tavernier;
 
@@ -14,7 +15,7 @@ public class Taverne {
     private Tavernier tavernier = new Tavernier();
     private boolean ouvert = true;
     private boolean tavernierLà = true;
-    private Combat combat = new Combat(new Quete());
+    private Combat combat = new Combat(new Quete(new Guerrier("")));
 
     public void setOuvert(boolean ouvert) {
         this.ouvert = ouvert;
