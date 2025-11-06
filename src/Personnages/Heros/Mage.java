@@ -2,7 +2,6 @@ package Personnages.Heros;
 
 import Base.ConsoleIO;
 import Personnages.Hero;
-import Personnages.Monstre;
 import Personnages.Personnage;
 
 public class Mage extends Hero {

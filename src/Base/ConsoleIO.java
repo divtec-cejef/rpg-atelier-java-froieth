@@ -1,13 +1,10 @@
 package Base;
 
 import Endroit.Boutique;
-import Endroit.Taverne;
 import Objet.*;
 import Personnages.Hero;
 import Personnages.Heros.Mage;
 import Personnages.Monstre;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleIO {

@@ -1,6 +1,5 @@
 package Personnages.monstres;
 
-import Personnages.Hero;
 import Personnages.Monstre;
 import Personnages.Personnage;
 

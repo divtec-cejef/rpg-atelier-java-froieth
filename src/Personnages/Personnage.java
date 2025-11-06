@@ -3,8 +3,6 @@ package Personnages;
 import Base.ConsoleIO;
 import Personnages.Heros.Mage;
 
-import static Objet.typeTrinket.PVMAX;
-
 public abstract class Personnage {
     private ConsoleIO console = new ConsoleIO();
     private String nom;
