@@ -8,7 +8,7 @@ public class Tavernier extends Monstre {
 
     @Override
     public String competenceSpecialeNom() {
-        return "Claque du seigneur";
+        return "Claque";
     }
 
     @Override

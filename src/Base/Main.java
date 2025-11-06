@@ -2,8 +2,6 @@ package Base;
 
 import Endroit.Boutique;
 import Endroit.Taverne;
-import Objet.Arme;
-import Objet.typeArme;
 import Personnages.Hero;
 import Personnages.Heros.Archer;
 import Personnages.Heros.Guerrier;
@@ -31,7 +29,7 @@ public class Main {
         return monstre;
     }
 
-    static void main(String[] args) {
+    static void main(String[] args) throws InterruptedException {
         ConsoleIO console = new ConsoleIO();
 
         Boutique boutique = new  Boutique();
@@ -39,17 +37,33 @@ public class Main {
         Hero hero;
 
         console.afficherMenuCréationPersonnage();
-        switch(console.readNextInt("Classe du Héro : ", 1, 3)) {
+        int classeHero = console.readNextInt("Classe du Héro : ", 1, 3);
+
+        console.afficherSansRetourLigne("Nom du Héro : ");
+        String nomHero = console.readNextLine();
+
+        // Met la première lettre en majuscule si besoin
+        if (nomHero != null && !nomHero.isEmpty()) {
+            char premiereLettre = nomHero.charAt(0);
+            if (Character.isLetter(premiereLettre) && !Character.isUpperCase(premiereLettre)) {
+                char majuscule = Character.toUpperCase(premiereLettre);
+                nomHero = majuscule + nomHero.substring(1);
+            }
+        }
+
+
+        switch(classeHero) {
             default:
-            case 1: console.afficherSansRetourLigne("Nom du Héro : "); hero = new Guerrier(console.readNextLine()); break;
-            case 2: console.afficherSansRetourLigne("Nom du Héro : "); hero = new Mage(console.readNextLine()); break;
-            case 3: console.afficherSansRetourLigne("Nom du Héro : "); hero = new Archer(console.readNextLine()); break;
+            case 1: hero = new Guerrier(nomHero); break;
+            case 2: hero = new Mage(nomHero); break;
+            case 3: hero = new Archer(nomHero); break;
         }
 
         hero.gagnerOr(50);
 
         Quete quete = new Quete(hero);
         boolean continuerJeux = true;
+        long startTime = System.currentTimeMillis();;
         do {
             console.afficherMenuPricipale();
             int choix = console.readNextInt("\nAction à réaliser : ", 0, 6);
@@ -59,12 +73,10 @@ public class Main {
                 case 2: console.afficherMenuPréparerCombat(hero, monstreAleatoire(), true, quete);break;
                 case 3: console.afficherMenuInventaire(hero);break;
                 case 4: boutique.visiter(hero);break;
-                case 5: taverne.visiter(hero);break;
+                case 5: taverne.visiter(hero, quete, startTime);break;
                 case 6: console.afficherMenuQuetes(quete);break;
             }
 
         } while (continuerJeux);
     }
 }
-
-// TODO : faire pour qu'il y ait un boss de fin (idée : tavernier (fort si tu l'as combattu sinon gentil))

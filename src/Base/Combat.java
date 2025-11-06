@@ -83,7 +83,6 @@ public class Combat {
                         console.afficher("\nVous avez été vaincu...");
                         console.consomerRetourLigne();
                         console.gameOver();
-                        System.exit(0);
                     }
                 }
             }

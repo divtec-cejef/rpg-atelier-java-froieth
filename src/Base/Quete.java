@@ -24,7 +24,7 @@ public class Quete {
         this.hero = hero;
 
         // Quête gobelin
-        nbreAVaincre.add(2);
+        nbreAVaincre.add(10);
         quetes.add("Vaicre " + nbreAVaincre.get(0) + " Gobelins");
         récompense.add(new Trinket(typeTrinket.PVMAX));
         terminer.add(false);
@@ -65,6 +65,19 @@ public class Quete {
         console.afficher(getRécompense().get(index).getNom());
         hero.ajouterObjet(récompense.get(index));
         console.consomerRetourLigne();
+
+        boolean activerQueteTaverne = true;
+        for (int i = 0; i < quetes.size(); i++) {
+            if(!terminer.get(i)) {
+                activerQueteTaverne = false;
+            }
+        }
+        if(activerQueteTaverne) {
+            nbreAVaincre.add(0);
+            quetes.add("Retourner à la taverne");
+            récompense.add(null);
+            terminer.add(false);
+        }
     }
 
     public void setNbreAVaincre(int index) {

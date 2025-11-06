@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleIO {
-
-
     private Scanner scanner = new Scanner(System.in);
 
     /**
@@ -35,7 +33,7 @@ public class ConsoleIO {
                 }
             } else {
                 scanner.next();
-                afficherSansRetourLigne("\nVeuillez saisir nombre !");
+                afficherSansRetourLigne("\nVeuillez saisir nombre !\n");
             }
         }
         return saisie;
@@ -133,7 +131,7 @@ public class ConsoleIO {
      */
     public void afficherMenuCombat(Hero hero, Monstre monstre) {
         afficherPersonnageCombat(hero, monstre);
-        afficherSansRetourLigne("======================== Combat ========================\n" +
+        afficherSansRetourLigne("=============================== Combat ===============================\n" +
                 "\t[1] Attaquer\n" +
                 "\t[2] " + hero.competenceSpecialeNom());
 
@@ -149,7 +147,7 @@ public class ConsoleIO {
      * Affiche tous les objets de l'inventaire
      */
     public void afficherMenuInventaire(Hero hero) {
-        afficher("\n======================== Inventaire ========================");
+        afficher("\n=========================== Inventaire ===========================");
 
         if (hero.getInventaire().size() == 0) {
             afficher("\tAucun objet");
@@ -185,16 +183,22 @@ public class ConsoleIO {
     /**
      * Affiche toutes les actions possible dans la taverne
      */
-    public void afficherMenuTaverne(int prixRepos, boolean tavernierLà) {
-        if(tavernierLà) {
-            afficher("\n======================== Taverne ========================\n" +
-                         "\t[1] Se reposer(" + prixRepos + " Or)\n" +
-                         "\t[2] Se battre avec le tavernier\n" +
-                         "\t[0] Partir\n");
+    public void afficherMenuTaverne(int prixRepos, boolean tavernierLà, boolean menuFin) {
+        if(!menuFin) {
+            if(tavernierLà) {
+                afficher("\n=============================== Taverne ===============================\n" +
+                             "\t[1] Se reposer(" + prixRepos + " Or)\n" +
+                             "\t[2] Se battre avec le tavernier\n" +
+                             "\t[0] Partir\n");
+            } else {
+                afficher("\n=============================== Taverne ===============================\n" +
+                             "\t[1] Se reposer\n" +
+                             "\t[0] Partir\n");
+            }
         } else {
-            afficher("\n======================== Taverne ========================\n" +
-                    "\t[1] Se reposer\n" +
-                    "\t[0] Partir\n");
+                afficher("\n=============================== Taverne ===============================\n" +
+                         "\t[1] ...\n" +
+                         "\t[0] Partir\n");
         }
     }
 
@@ -205,7 +209,10 @@ public class ConsoleIO {
         afficher("\n============================ Quêtes ============================");
         for(int i = 0; i < quete.getQuetes().size(); i++) {
             if(quete.getQueteTerminer().get(i) == false) {
-                afficher("\t[" + (i + 1) + "] " + quete.getQuetes().get(i) + " -> Récompense : " + quete.getRécompense().get(i).getNom());
+                afficherSansRetourLigne("\t[X] " + quete.getQuetes().get(i));
+                if(i != 3) {
+                    afficher(" -> Récompense : " + quete.getRécompense().get(i).getNom());
+                } else {afficher("\n");}
             }
         }
         readNextLine();
@@ -226,7 +233,70 @@ public class ConsoleIO {
                 "██     ██   ██   ██   ██▀▀▀ ██▄▄▄▄▄▀▀\n" +
                 "██     ██   ██   ██   ██    ██     ██\n" +
                 "███▄▄▄███     ▀█▀     ██▄▄▄ ██     ██▄\n");
+        System.exit(0);
     }
 
+    /**
+     * Affiche le chrono du joueur et le générique de fin
+     * @param startTime Heure de début du jeu
+     * @throws InterruptedException Permet d'injterrompre le programme (pour faire l'effet du générique)
+     */
+    public void afficherGénériqueFin(long startTime) throws InterruptedException {
+        long endTime = System.currentTimeMillis();
+        long elapsedMillis = endTime - startTime;
 
+        long elapsedSeconds = elapsedMillis / 1000;
+        long heures = elapsedSeconds / 3600;
+        long minutes = (elapsedSeconds % 3600) / 60;
+        long secondes = elapsedSeconds % 60;
+
+        for(int i = 0; i < 10; i++) {
+            afficher("\n");
+            Thread.sleep(200);
+        }
+
+        afficher("Bravo. vous avez fini le jeu en " + heures + "h " + minutes + "m " + secondes + "s.\n\n\n");
+        Thread.sleep(2000);
+        String[] credits = {
+                "Développement",
+                "  • Direction technique : Ethan Froidevaux",
+                "  • Programmation : Ethan Froidevaux",
+                "",
+                "Scénario",
+                "  • Conception narrative : Ethan Froidevaux",
+                "  • Dialogues : Copilot",
+                "",
+                "Tests",
+                "  • Testeurs : Ethan Froidevaux",
+                "",
+                "Production",
+                "  • Producteur exécutif : Ethan Froidevaux",
+                "  • Coordination : Ethan Froidevaux",
+                "",
+                "Remerciements",
+                "  • À tous les joueurs qui ont vécu cette aventure",
+                "",
+                "Ce jeu a été réalisé avec passion et engagement.",
+                "Chaque ligne de code raconte une histoire.",
+                "",
+                "Merci d’avoir joué.",
+                "",
+        };
+
+        for (String ligne : credits) {
+            System.out.println(ligne);
+            Thread.sleep(1000); // 1 seconde entre chaque ligne pour un rythme solennel
+        }
+
+        afficher("░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░      ░▒▓████████▓▒░▒▓███████▓▒░░▒▓███████▓▒░  \n" +
+                     "   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ \n" +
+                     "   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ \n" +
+                     "   ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓██████▓▒░        ░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ \n" +
+                     "   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ \n" +
+                     "   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ \n" +
+                     "   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░      ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░  \n");
+
+
+        System.exit(0);
+    }
 }
